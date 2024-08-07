@@ -1,6 +1,7 @@
 using Book_API.Repositories;
 using Book_API.Services;
 
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -9,6 +10,10 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddTransient<IBooksRepository, BooksRepository>(_ => new BooksRepository("Server=localhost;Database=Books;Trusted_Connection=True;"));
+
+
 
 var app = builder.Build();
 
@@ -19,9 +24,6 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-builder.Services.AddSingleton<IBooksRepository, BooksRepository>(_ => new BooksRepository("Server=localhost;Database=Books;Trusted_Connection=True;"));
-builder.Services.AddSingleton<IBooksRepository, BooksService>();
-
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
@@ -29,3 +31,5 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+
