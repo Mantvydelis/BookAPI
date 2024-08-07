@@ -20,7 +20,7 @@ if (app.Environment.IsDevelopment())
 }
 
 builder.Services.AddSingleton<IBooksRepository, BooksRepository>(_ => new BooksRepository("Server=localhost;Database=Books;Trusted_Connection=True;"));
-builder.Services.AddTransient<IBooksRepository, BooksService>();
+builder.Services.AddSingleton<IBooksRepository, BooksService>();
 
 app.UseHttpsRedirection();
 

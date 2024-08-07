@@ -84,14 +84,15 @@ namespace Book_API.Repositories
         }
 
 
-            public void DeleteBook(int id)
-            {
+        public void DeleteBook(int id)
+        {
             using IDbConnection dbConnection = new SqlConnection(_dbConnectionString);
             dbConnection.Open();
             dbConnection.Execute(@"DELETE FROM Books WHERE Id = @id", new { Id = id });
             dbConnection.Close();
-
-
         }
+
+
+        
         }
     } 
